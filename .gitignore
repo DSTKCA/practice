@@ -1,0 +1,6 @@
+# Ignore the build dir
+**/**/build
+**/**/debug
+**/**/release
+**/**/.cache
+**/**/.vscode
