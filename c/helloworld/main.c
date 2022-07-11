@@ -75,7 +75,7 @@ int main(int argc, const char * argv[]) {
     printf("new array init_1 address: %p\n", init11);
     printf("1st node of new array init_1: %c\n\n", init_1[0]);
 
-    char fname[30] = {0};
+    char fname[30];
     char lname[30] = {0};
     int age;
 
