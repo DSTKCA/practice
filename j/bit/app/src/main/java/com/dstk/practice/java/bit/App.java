@@ -318,6 +318,7 @@ public class App {
 		if (nIt < 0) {
 //			System.out.println("Exceeded the capacity!");
 			logger.info("Exceeded the capacity!");
+			in.close();
 			return;
 		}
 		for (int i = 0; i < nIt; i++) {
