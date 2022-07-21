@@ -26,7 +26,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'com.dstk.practice.j.linkedlist.App'
+    mainClass = 'com.dstk.practice.java.linkedlist.App'
 }
 
 tasks.named('test') {
