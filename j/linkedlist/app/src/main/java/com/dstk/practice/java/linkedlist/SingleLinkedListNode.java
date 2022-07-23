@@ -28,4 +28,10 @@ public class SingleLinkedListNode {
 		this.data = data;
 		this.next = next;
 	}
+	
+	public void printNodeValue() {
+		if (this.data!=null) {
+			System.out.println("Node value: " + this.data);
+		}
+	}
 }

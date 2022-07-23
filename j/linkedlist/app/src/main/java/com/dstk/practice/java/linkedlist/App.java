@@ -10,7 +10,7 @@ public class App {
 		return "Hello World, Practice Java Linked List!";
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		System.out.println(new App().getGreeting());
 
 		// Single LinkedList
@@ -32,14 +32,197 @@ public class App {
 
 		SingleLinkedList linitArray = new SingleLinkedList();
 		linitArray.initWithArray(initArray);
-		
+		linitArray.printList();
+
+		System.out.println("------------------\n");
+
+		linitArray.setHead("NEW HEAD -----------");
+		linitArray.printList();
+
+		System.out.println("------------------\n");
+
 		// Append the new String array
 		ArrayList<String> appendArray = new ArrayList<>();
 		appendArray.add("Welcome!");
 		appendArray.add("欢迎!");
 		appendArray.add("Leihou!");
-		
-		linitArray.appendArray(appendArray);
 
+		linitArray.appendArray(appendArray);
+		linitArray.printList();
+
+		System.out.println("------------------\n");
+
+		linitArray.setRear("NEW REAR -----------");
+		linitArray.printList();
+
+		System.out.println("------------------\n");
+
+		linitArray.removeHead();
+		linitArray.printList();
+
+		System.out.println("------------------\n");
+
+		linitArray.removeRear();
+		linitArray.printList();
+
+		System.out.println("------------------\n");
+
+		String sValue = "Leihou!";
+		SingleLinkedListNode s = linitArray.searchByData(sValue);
+		if (s != null) {
+			s.printNodeValue();
+		} else {
+			System.out.println(String.format("Node with value '%s' not found", sValue));
+		}
+
+		System.out.println("\nGet by index ------------------");
+
+		s = linitArray.getByIndex(8);
+		s.printNodeValue();
+
+		System.out.println("\nInsert as head ------------------");
+
+		// Insert as head
+		linitArray.insertBefore("Hello!", "--- New head ---");
+		linitArray.printList();
+
+		System.out.println("\nInsert before node ------------------");
+
+		// Insert before node
+		linitArray.insertBefore("Hej!", "--- New node before hej ---");
+		linitArray.printList();
+
+		System.out.println("\n'Leihou' not found ------------------");
+
+		// Not found
+		linitArray.insertBefore("Leihou", "--- New node ---");
+		linitArray.printList();
+
+		System.out.println("\n'Halo' not found ------------------");
+
+		// Not found
+		linitArray.insertAfter("Halo", "--- New node ---");
+		linitArray.printList();
+
+		System.out.println("\nInsert after node -----------------");
+
+		// Insert after node
+		linitArray.insertAfter("Halo!", "--- New node after halo ---");
+		linitArray.printList();
+
+		System.out.println("\nInsert after rear -----------------");
+		linitArray.insertAfter("Leihou!", "--- New node after rear ---");
+		linitArray.printList();
+
+		System.out.println("\nRemove '--- New node after halo ---' -----------------");
+		linitArray.removeData("--- New node after halo ---");
+		linitArray.printList();
+
+		System.out.println("\nRemoving node at index '0' -----------------");
+		linitArray.removeDataAtIndex(0);
+		linitArray.printList();
+
+		System.out.println("\nRemoving node at index '11' -----------------");
+		linitArray.removeDataAtIndex(11);
+		linitArray.printList();
+
+		System.out.println("\nLeetCode: Reverse the list -----------------");
+		linitArray.reverseList();
+		linitArray.printList();
+
+		System.out.println("\nLeetCode: Check if there's circle in list-----------------");
+		System.out.println(String.format("There %s a circle in the list", linitArray.hasCircle() ? "IS" : "IS NOT"));
+		linitArray.getRear().getNext().setNext(linitArray.getHead().getNext());
+		System.out.println(String.format("There %s a circle in the list", linitArray.hasCircle() ? "IS" : "IS NOT"));
+		linitArray.getRear().getNext().setNext(null);
+
+		System.out.println("\nLeetCode: Check if there's circle in single node list-----------------");
+		SingleLinkedList singleNodeList = new SingleLinkedList();
+		singleNodeList.setHead("head");
+		singleNodeList.getRear().getNext().setNext(singleNodeList.getHead().getNext());
+		System.out.println(
+				String.format("There %s a circle in single list", singleNodeList.hasCircle() ? "IS" : "IS NOT"));
+		
+		System.out.println("\nLeetCode: Merge 2 sequential list into 1-----------------");
+		
+		ArrayList<Integer> intArrayA = new ArrayList<>();
+		intArrayA.add(100);
+		intArrayA.add(300);
+		intArrayA.add(500);
+		intArrayA.add(700);
+		intArrayA.add(900);
+		IntSingleList aList = new IntSingleList();
+		aList.appendArray(intArrayA);
+		System.out.println("\nSequential list 1-----------------");
+		aList.printList();
+		
+		ArrayList<Integer> intArrayB = new ArrayList<>();
+		intArrayB.add(200);
+		intArrayB.add(400);
+		intArrayB.add(600);
+		intArrayB.add(800);
+		intArrayB.add(1000);
+		IntSingleList bList = new IntSingleList();
+		bList.appendArray(intArrayB);
+		System.out.println("\nSequential list 2-----------------");
+		bList.printList();
+		
+		IntSingleList mergedList = LinkedListHandler.mergeList(aList, bList);
+		System.out.println("\nMerged sequential list-----------------");
+		mergedList.printList();
+		
+		System.out.println("\nLeetCode: Remove the node at reverse Nth position, iterate twice -----------------");
+		System.out.println("\nList before removing-----------------");
+		linitArray.printList();
+		System.out.println("\nRemoving the Nth node from reverse-----------------");
+		linitArray.removeAtReverseIndexIterateTwice(4);
+		System.out.println("\nList after removing-----------------");
+		linitArray.printList();
+		
+		System.out.println("\nLeetCode: Remove the node at reverse Nth position, iterate once -----------------");
+		System.out.println("\nList before removing-----------------");
+		linitArray.printList();
+		System.out.println("\nRemoving the Nth node from reverse-----------------");
+		linitArray.removeAtReverseIndexIterateOnce(10);
+		System.out.println("\nList after removing-----------------");
+		linitArray.printList();
+		
+		System.out.println("\nLeetCode: Remove the node at reverse Nth position, iterate once, 2 nodes -----------------");
+		ArrayList<String> twoNodes = new ArrayList<>();
+		twoNodes.add("Yes");
+		twoNodes.add("No");
+		SingleLinkedList twoNodesList = new SingleLinkedList();
+		twoNodesList.appendArray(twoNodes);
+		System.out.println("\nList before removing-----------------");
+		twoNodesList.printList();
+		System.out.println("\nRemoving the Nth node from reverse-----------------");
+		twoNodesList.removeAtReverseIndexIterateOnce(0);
+		System.out.println("\nList after removing-----------------");
+		twoNodesList.printList();
+		
+		System.out.println("\nLeetCode: Get middle node of the list, node number ODD -----------------");
+		ArrayList<Integer> oddArray = new ArrayList<>();
+		oddArray.add(200);
+		oddArray.add(100);
+		oddArray.add(400);
+		IntSingleList oddList = new IntSingleList();
+		oddList.appendArray(oddArray);
+		System.out.println("\nList -----------------");
+		oddList.printList();
+		System.out.println(String.format("Middle node of the list is '%d'", oddList.getMidNode().getData()));
+		
+		System.out.println("\nLeetCode: Get middle node of the list, node number EVEN -----------------");
+		ArrayList<Integer> evenArray = new ArrayList<>();
+		evenArray.add(200);
+		evenArray.add(500);
+		evenArray.add(400);
+		evenArray.add(300);
+		IntSingleList evenList = new IntSingleList();
+		evenList.appendArray(evenArray);
+		System.out.println("\nList -----------------");
+		evenList.printList();
+		System.out.println(String.format("Middle node of the list is '%d'", evenList.getMidNode().getData()));
+		
 	}
+
 }
