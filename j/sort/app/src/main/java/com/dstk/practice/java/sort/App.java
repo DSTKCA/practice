@@ -22,6 +22,14 @@ public class App {
 		System.out.println("----------- Selection Sorting -----------");
 		int[] sArray = { 13, 14, 94, 33, 82, 25, 59, 94, 65, 23, 45, 27, 73, 25, 39, 10 };
 		System.out.println(java.util.Arrays.toString(IntegerArraySorter.selectionSort(sArray)));
+		
+		System.out.println("----------- Merge Sorting -----------");
+		int[] mArray = { 13, 14, 94, 33, 82, 25, 59, 94, 65, 23, 45, 27, 73, 25, 39, 10, 1};
+		System.out.println(java.util.Arrays.toString(IntegerArraySorter.mergeSort(mArray)));
+		
+		System.out.println("----------- Quick Sorting -----------");
+		int[] qArray = { 13, 14, 94, 33, 82, 25, 59, 94, 65, 23, 45, 27, 73, 25, 39, 10, 1, 22};
+		System.out.println(java.util.Arrays.toString(IntegerArraySorter.quickSort(qArray)));
 
 	}
 }
