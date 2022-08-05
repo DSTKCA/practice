@@ -4,6 +4,9 @@
 package com.dstk.practice.java.sort;
 
 import org.testng.annotations.*;
+
+import com.dstk.practice.java.app.App;
+
 import static org.testng.Assert.*;
 
 public class AppTest {

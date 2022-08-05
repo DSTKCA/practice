@@ -1,5 +1,7 @@
 package com.dstk.practice.java.sort;
 
+import com.dstk.practice.java.maths.MathsUtil;
+
 public class IntegerArraySorter {
 
 	/**
@@ -87,6 +89,59 @@ public class IntegerArraySorter {
 			// Put here to ensure array[0] works fine
 			array[j + 1] = temp;
 
+		}
+
+		return array;
+	}
+
+	/**
+	 * Shell Sort
+	 * 
+	 * If n > 10, set first gap = sqrt(n), then iterate with 1/2 gap till gap = 1
+	 * 
+	 * Un-stable sort Not in place
+	 * 
+	 * SC = O(1)
+	 * 
+	 * Best TC = O(nLogn) Worst TC = O(n^2) Avg TC = ? depends on gap
+	 * 
+	 * 
+	 * @param array
+	 * @return
+	 * @throws Exception
+	 */
+	public static int[] shellSort(int[] array) throws Exception {
+
+		// Gap
+		int gap = (int) Math.round(MathsUtil.SquareRoot2(Integer.valueOf(array.length), 0.1));
+
+		// Iterate to divide the array item to different groups based on gap
+		while (gap > 1) {
+
+			// Iterate to perform insertion sort for each group divided by gap,
+			// g is the group index
+			for (int g = 0; g < gap; g++) {
+				// item number of each group
+				int itemNum = array.length / gap;
+				if (array.length % gap > g) {
+					itemNum++;
+				}
+				// Insertion Sort of each group, i and j are the relative item index
+				for (int i = 1; i < itemNum; i++) {
+					int temp = array[gap * i + g];
+					int j = i - 1;
+					for (; j >= 0; j--) {
+						if (array[gap * j + g] > temp) {
+							array[gap * (j + 1) + g] = array[gap * j + g];
+							array[gap * j + g] = temp;
+						} else {
+							break;
+						}
+					}
+				}
+			}
+			// Reduce the gap till it's 1
+			gap = gap / 2;
 		}
 
 		return array;
@@ -265,4 +320,68 @@ public class IntegerArraySorter {
 		recursionQuickSort(array, startIndex, pivot - 1);
 		recursionQuickSort(array, pivot + 1, endIndex);
 	}
+
+	/**
+	 * Get the Nth largest item, Use Quick Sort with descendant order
+	 * 
+	 * @param array
+	 * @param n
+	 * @return
+	 */
+	public static int[] getNthLargestItem(int[] array, int n) {
+
+		// Recursion of the partition of the 2 sub arrays
+		recursionQuickSortGetNthLargestItem(array, 0, array.length - 1, n);
+		return array;
+	}
+
+	private static int partitionDesc(int[] array, int startIndex, int endIndex) {
+
+		// Use last item as pivot
+		int pivotValue = array[endIndex];
+		// Rear of the larger zone
+		int i = startIndex;
+		// Index of 'to be handled' item
+		int j = startIndex;
+
+		// Iteration to move all items smaller than pivot to the handled zone
+		for (; j < endIndex; j++) {
+			// Item > pivot, then move it to the smaller zone (rear of the larger zone -
+			// array[i])
+			// Swap array[i] and array[j]
+			if (array[j] > pivotValue) {
+				int temp = array[i];
+				array[i++] = array[j];
+				array[j] = temp;
+			}
+		}
+
+		// Move pivot to the correct position by swapping the smaller index and endIndex
+		array[endIndex] = array[i];
+		array[i] = pivotValue;
+
+		// Return pivot index
+		return i;
+	}
+
+	private static void recursionQuickSortGetNthLargestItem(int[] array, int startIndex, int endIndex, int n) {
+
+		// End condition
+		if (startIndex >= endIndex) {
+			return;
+		}
+
+		// Set the last item as pivot, create 2 partitions
+		int pivot = partitionDesc(array, startIndex, endIndex);
+
+		// Recursion of quick sort of each partition (smaller one, and larger one,
+		// Do NOT include pivot !!!)
+		if (pivot + 1 > n) {
+			recursionQuickSortGetNthLargestItem(array, startIndex, pivot - 1, n);
+		} else if (pivot + 1 < n) {
+			recursionQuickSortGetNthLargestItem(array, pivot + 1, endIndex, n);
+		}
+
+	}
+
 }

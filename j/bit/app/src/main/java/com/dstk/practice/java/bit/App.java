@@ -155,7 +155,7 @@ public class App {
 		// Solution:
 		// According to:
 		// 1. if x >=0, x >> 31/63 = 0, else x >> 31/63 = -1
-		// 2. given integer x: x ^ 0 = x, and (x ^ -1) + 1 = -x
+		// 2. given integer x, then: x ^ 0 = x, and (x ^ -1) + 1 = -x
 		// => if (x >= 0) abs = (x ^ (x >> 31/63)) +/- 0 (-(x >> 31/63))
 		// else abs = (x ^ (x >> 31/63)) + 1 (- (x >> 31/63))
 		logger.info("Enter the number as the argument for ABS:");
